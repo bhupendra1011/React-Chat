@@ -8,6 +8,7 @@ const Chat = props => {
   const { is_user_msg, text, number } = msg;
   const handleDelete = e => {
     // call action to delete msg
+    e.stopPropagation();
     const action = deleteMessage(userId, number);
     store.dispatch(action);
     // dispatch action
@@ -20,12 +21,12 @@ const Chat = props => {
   };
   return (
     <div
-      className={`Chat ${is_user_msg ? "is-user-msg" : ""}`}
+      className={`Chat ${!is_user_msg ? "is-user-msg" : ""}`}
       onClick={handleUpdate}
     >
       {" "}
       {text}
-      {is_user_msg ? (
+      {!is_user_msg ? (
         <span className="Chat__del_msg" onClick={handleDelete}>
           {" "}
           X{" "}

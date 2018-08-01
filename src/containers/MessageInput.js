@@ -1,6 +1,6 @@
 import React from "react";
 import store from "../store";
-import { setTypingValue, sendMessage, updateMessage } from "../action";
+import { setTypingValue, sendMessage } from "../action";
 import "./MessageInput.css";
 
 const MessageInput = ({ value }) => {
@@ -10,11 +10,12 @@ const MessageInput = ({ value }) => {
   };
   const handleSubmit = e => {
     e.preventDefault();
-    const { activeUserId, typing } = store.getState();
-    const action = sendMessage(activeUserId, typing);
+    const { activeUserId, typing, activeChatId } = store.getState();
+    const action = sendMessage(activeUserId, typing, activeChatId);
     // const action  = updateMessage(activeUserId, ,typing)
     store.dispatch(action);
   };
+
   return (
     <form action="" className="Message" onSubmit={handleSubmit}>
       <input

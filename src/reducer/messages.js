@@ -8,16 +8,18 @@ import {
 export default (state = getMessages(10), action) => {
   switch (action.type) {
     case SEND_MESSAGE:
-      const { message, userId } = action.payload;
+      const { message, userId, chatId } = action.payload;
+      if (!userId) return state;
       const allUserMsg = state[userId];
-      const number = +Object.keys(allUserMsg).pop() + 1;
+      const number = chatId || +Object.keys(allUserMsg).pop() + 1;
+
       return {
         ...state,
         [userId]: {
           ...allUserMsg,
           [number]: {
             number,
-            text: message,
+            text: chatId ? message + "(edited)" : message,
             is_user_msg: false
           }
         }
@@ -38,6 +40,7 @@ export default (state = getMessages(10), action) => {
         messageNumber: msgNumber,
         message: updateText
       } = action.payload;
+
       const allUserMsges = state[userID];
       const oldMessage = allUserMsges[msgNumber];
       return {

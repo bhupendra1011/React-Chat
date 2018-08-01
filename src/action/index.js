@@ -16,11 +16,12 @@ export const setTypingValue = text => ({
   payload: text
 });
 
-export const sendMessage = (userId, message) => ({
+export const sendMessage = (userId, message, chatId) => ({
   type: SEND_MESSAGE,
   payload: {
     userId,
-    message
+    message,
+    chatId
   }
 });
 

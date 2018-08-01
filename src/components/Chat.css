@@ -16,9 +16,7 @@
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
-.Chat:not(.is-user-msg) {
-  cursor: copy;
-}
+
 .Chat.is-user-msg {
   margin-left: auto;
   background: #2b2c33;
@@ -27,6 +25,7 @@
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   position: relative;
+  cursor: copy;
 }
 span.Chat.is-user-msg:after {
   content: "x";
