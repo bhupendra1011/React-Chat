@@ -1,9 +1,5 @@
 import { getMessages } from "../static-data";
-import {
-  SEND_MESSAGE,
-  DELETE_MESSAGE,
-  UPDATE_MESSAGE
-} from "../action/constants/action-types";
+import { SEND_MESSAGE, DELETE_MESSAGE } from "../action/constants/action-types";
 
 export default (state = getMessages(10), action) => {
   switch (action.type) {
@@ -32,26 +28,6 @@ export default (state = getMessages(10), action) => {
       return {
         ...state,
         [userId]: filterMsg
-      };
-
-    case UPDATE_MESSAGE:
-      const {
-        userId: userID,
-        messageNumber: msgNumber,
-        message: updateText
-      } = action.payload;
-
-      const allUserMsges = state[userID];
-      const oldMessage = allUserMsges[msgNumber];
-      return {
-        ...state,
-        [userID]: {
-          ...allUserMsges,
-          [msgNumber]: {
-            ...oldMessage,
-            text: updateText
-          }
-        }
       };
     default:
       return state;
